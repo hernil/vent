@@ -6,20 +6,19 @@
 </template>
 
 <script>
+  /* eslint-disable no-console,prefer-const,spaced-comment */
+
+  import axios from 'axios';
   import VueHighcharts from 'vue2-highcharts';
 
-  const asyncData = {
+// eslint-disable-next-line prefer-const
+  /*let asyncData = {
     name: 'Tokyo',
     marker: {
       symbol: 'square',
     },
-    data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, {
-      y: 26.5,
-      marker: {
-        symbol: 'url(http://www.highcharts.com/demo/gfx/sun.png)',
-      },
-    }, 23.3, 18.3, 13.9, 9.6],
-  };
+    data: [],
+  };*/
   export default{
     components: {
       VueHighcharts,
@@ -75,8 +74,19 @@
         const lineCharts = this.$refs.lineCharts;
         lineCharts.delegateMethod('showLoading', 'Loading...');
         setTimeout(() => {
-          lineCharts.addSeries(asyncData);
-          lineCharts.hideLoading();
+          let asyncData = {};
+          axios.get('http://localhost:8080/data')
+            .then((response) => {
+              // JSON responses are automatically parsed.
+              // console.log(response.data);
+              asyncData = response.data;
+              console.log(asyncData);
+              lineCharts.addSeries(asyncData);
+              lineCharts.hideLoading();
+            })
+            .catch((e) => {
+              console.log(e);
+            });
         }, 50);
       },
     },

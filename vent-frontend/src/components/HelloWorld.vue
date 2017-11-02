@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg.content }}</h1>
+    <h1>{{ data.content }}</h1>
     <DataView/>
   </div>
 </template>
@@ -16,7 +16,7 @@
     },
     data() {
       return {
-        msg: { content: 'Hei verden!' },
+        data: { content: 'Hei verden!' },
         errors: [],
       };
     },
@@ -24,7 +24,7 @@
       axios.get('http://localhost:8080/greeting?name=Nils')
         .then((response) => {
           // JSON responses are automatically parsed.
-          this.msg = response.data;
+          this.data = response.data;
         })
         .catch((e) => {
           this.errors.push(e);

@@ -49,6 +49,26 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
+
+		<!-- JPA Data (We are going to use Repositories, Entities, Hibernate, etc...) -->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<!-- Use MySQL Connector-J -->
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-maven-noarg</artifactId>
+            <version>1.1.51</version>
+        </dependency>
         <!--<dependency>
             <groupId>com.beust</groupId>
             <artifactId>klaxon</artifactId>
@@ -77,6 +97,9 @@
 					<compilerPlugins>
 						<plugin>spring</plugin>
 					</compilerPlugins>
+                    <pluginOptions>
+                        <option>jpa:annotation=com.hernil.vent</option>
+                    </pluginOptions>
 					<jvmTarget>1.8</jvmTarget>
 				</configuration>
 				<executions>

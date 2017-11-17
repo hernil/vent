@@ -1,7 +1,7 @@
 <template>
   <div>
     <vue-highcharts :options="options" ref="lineCharts"></vue-highcharts>
-    <button @click="load">load</button>
+    <!--<button @click="load">load</button>-->
   </div>
 </template>
 
@@ -11,7 +11,7 @@
   import axios from 'axios';
   import VueHighcharts from 'vue2-highcharts';
 
-// eslint-disable-next-line prefer-const
+  // eslint-disable-next-line prefer-const
   /*let asyncData = {
     name: 'Tokyo',
     marker: {
@@ -19,7 +19,7 @@
     },
     data: [],
   };*/
-  export default{
+  export default {
     components: {
       VueHighcharts,
     },
@@ -69,26 +69,25 @@
         },
       };
     },
-    methods: {
-      load() {
-        const lineCharts = this.$refs.lineCharts;
-        lineCharts.delegateMethod('showLoading', 'Loading...');
-        setTimeout(() => {
-          let asyncData = {};
-          axios.get('http://localhost:8080/data')
-            .then((response) => {
-              // JSON responses are automatically parsed.
-              // console.log(response.data);
-              asyncData = response.data;
-              console.log(asyncData);
-              lineCharts.addSeries(asyncData);
-              lineCharts.hideLoading();
-            })
-            .catch((e) => {
-              console.log(e);
-            });
-        }, 50);
-      },
+    mounted() {
+      const lineCharts = this.$refs.lineCharts;
+      const url = 'http://localhost:8080/data/20';
+      lineCharts.delegateMethod('showLoading', 'Loading...');
+      setTimeout(() => {
+        let asyncData = {};
+        axios.get(url)
+          .then((response) => {
+            // JSON responses are automatically parsed.
+            // console.log(response.data);
+            asyncData = response.data;
+            console.log(asyncData);
+            lineCharts.addSeries(asyncData);
+            lineCharts.hideLoading();
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      }, 50);
     },
   };
 </script>

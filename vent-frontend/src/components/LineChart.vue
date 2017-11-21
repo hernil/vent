@@ -11,14 +11,6 @@
   import axios from 'axios';
   import VueHighcharts from 'vue2-highcharts';
 
-  // eslint-disable-next-line prefer-const
-  /*let asyncData = {
-    name: 'Tokyo',
-    marker: {
-      symbol: 'square',
-    },
-    data: [],
-  };*/
   export default {
     components: {
       VueHighcharts,
@@ -70,7 +62,7 @@
       };
     },
     mounted() {
-      const lineCharts = this.$refs.lineCharts;
+      /*const lineCharts = this.$refs.lineCharts;
       const url = 'http://localhost:8080/data/20';
       lineCharts.delegateMethod('showLoading', 'Loading...');
       setTimeout(() => {
@@ -87,7 +79,12 @@
           .catch((e) => {
             console.log(e);
           });
-      }, 50);
+      }, 50);*/
+      const lineCharts = this.$refs.lineCharts;
+      const url = 'http://localhost:8080/data/20';
+      axios.get(url).then((response) => {
+        lineCharts.addSeries(response.data);
+      });
     },
   };
 </script>

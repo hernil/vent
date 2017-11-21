@@ -2,13 +2,13 @@
   <div>
     <h1>{{ data.content }}</h1>
     <div class="pure-g">
-      <div class="pure-u-1 pure-u-md-1-3">
+      <div class="pure-u-1 pure-u-lg-1-3">
         <LineChartView/>
       </div>
-      <div class="pure-u-1 pure-u-md-1-3">
-        <LineChartView/>
+      <div class="pure-u-1 pure-u-lg-1-3">
+        <PieChartView/>
       </div>
-      <div class="pure-u-1 pure-u-md-1-3">
+      <div class="pure-u-1 pure-u-lg-1-3">
         <LineChartView/>
       </div>
     </div>
@@ -18,11 +18,13 @@
 <script>
   import axios from 'axios';
   import LineChartView from './LineChart';
+  import PieChartView from './PieChart';
 
   export default {
     name: 'HelloWorld',
     components: {
       LineChartView,
+      PieChartView,
     },
     data() {
       return {

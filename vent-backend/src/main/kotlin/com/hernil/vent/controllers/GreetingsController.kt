@@ -1,5 +1,7 @@
-package com.hernil.vent
+package com.hernil.vent.controllers
 
+import com.hernil.vent.domain.Greeting
+import com.hernil.vent.services.DataRepository
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam

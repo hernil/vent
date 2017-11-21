@@ -1,5 +1,7 @@
-package com.hernil.vent
+package com.hernil.vent.controllers
 
+import com.hernil.vent.domain.Data
+import com.hernil.vent.services.DataRepository
 import org.springframework.web.bind.annotation.*
 
 @RestController

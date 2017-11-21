@@ -1,4 +1,4 @@
-package com.hernil.vent
+package com.hernil.vent.domain
 
 import javax.persistence.*
 

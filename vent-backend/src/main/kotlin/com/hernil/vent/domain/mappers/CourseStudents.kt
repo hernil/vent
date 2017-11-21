@@ -1,7 +1,7 @@
 package com.hernil.vent.domain.mappers
 
-import com.fasterxml.jackson.annotation.JsonBackReference
-import com.fasterxml.jackson.annotation.JsonManagedReference
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.hernil.vent.domain.Course
 import com.hernil.vent.domain.Student
 import java.io.Serializable
@@ -9,14 +9,17 @@ import javax.persistence.*
 
 @Entity
 data class CourseStudents(@EmbeddedId
+                          @JsonIgnore
                           val id: CourseStudentsId = CourseStudentsId(),
                           @ManyToOne
                           @JoinColumn(insertable = false, updatable = false)
-                          @JsonManagedReference
+                          //@JsonIgnoreProperties("student")
+                          @JsonIgnore
                           val course: Course = Course(),
                           @ManyToOne
                           @JoinColumn(insertable = false, updatable = false)
-                          @JsonBackReference
+                          //@JsonIgnoreProperties("course")
+                          //@JsonIgnore
                           val student: Student = Student(),
                           val grade: String = "") {
 }

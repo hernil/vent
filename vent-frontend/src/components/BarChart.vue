@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vue-highcharts :options="options" ref="lineCharts"></vue-highcharts>
+    <vue-highcharts :options="options" ref="barCharts"></vue-highcharts>
     <!--<button @click="load">load</button>-->
   </div>
 </template>
@@ -19,7 +19,7 @@
       return {
         options: {
           chart: {
-            type: 'spline',
+            type: 'bar',
           },
           title: {
             text: 'Monthly Average Temperature',
@@ -62,9 +62,9 @@
       };
     },
     mounted() {
-      /*const lineCharts = this.$refs.lineCharts;
+      /*const barCharts = this.$refs.barCharts;
       const url = 'http://localhost:8080/data/20';
-      lineCharts.delegateMethod('showLoading', 'Loading...');
+      barCharts.delegateMethod('showLoading', 'Loading...');
       setTimeout(() => {
         let asyncData = {};
         axios.get(url)
@@ -73,17 +73,17 @@
             // console.log(response.data);
             asyncData = response.data;
             console.log(asyncData);
-            lineCharts.addSeries(asyncData);
-            lineCharts.hideLoading();
+            barCharts.addSeries(asyncData);
+            barCharts.hideLoading();
           })
           .catch((e) => {
             console.log(e);
           });
       }, 50);*/
-      const lineCharts = this.$refs.lineCharts;
+      const barCharts = this.$refs.barCharts;
       const url = 'http://localhost:8080/data/1';
       axios.get(url).then((response) => {
-        lineCharts.addSeries(response.data);
+        barCharts.addSeries(response.data);
       });
     },
   };

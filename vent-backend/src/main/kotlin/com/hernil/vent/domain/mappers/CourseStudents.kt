@@ -13,13 +13,11 @@ data class CourseStudents(@EmbeddedId
                           val id: CourseStudentsId = CourseStudentsId(),
                           @ManyToOne
                           @JoinColumn(insertable = false, updatable = false)
-                          //@JsonIgnoreProperties("student")
-                          @JsonIgnore
+                          @JsonIgnoreProperties("students")
                           val course: Course = Course(),
                           @ManyToOne
                           @JoinColumn(insertable = false, updatable = false)
-                          //@JsonIgnoreProperties("course")
-                          //@JsonIgnore
+                          @JsonIgnoreProperties("courses")
                           val student: Student = Student(),
                           val grade: String = "") {
 }

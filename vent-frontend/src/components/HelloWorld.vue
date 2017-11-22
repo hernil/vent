@@ -9,7 +9,7 @@
         <PieChartView/>
       </div>
       <div class="pure-u-1 pure-u-lg-1-3">
-        <LineChartView/>
+        <BarChartView/>
       </div>
     </div>
   </div>
@@ -19,12 +19,14 @@
   import axios from 'axios';
   import LineChartView from './LineChart';
   import PieChartView from './PieChart';
+  import BarChartView from './BarChart';
 
   export default {
     name: 'HelloWorld',
     components: {
       LineChartView,
       PieChartView,
+      BarChartView,
     },
     data() {
       return {

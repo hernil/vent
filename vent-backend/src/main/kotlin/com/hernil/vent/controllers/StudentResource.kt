@@ -1,12 +1,12 @@
 package com.hernil.vent.controllers
 
-import com.hernil.vent.domain.CourseRepository
+import com.hernil.vent.domain.StudentRepository
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @CrossOrigin(origins = arrayOf("http://localhost:3000"))
-@RequestMapping("/course")
-class CourseResource(val repository: CourseRepository) {
+@RequestMapping("/student")
+class StudentResource(val repository: StudentRepository) {
 
     @GetMapping(value = "/all")
     fun getData() = repository.findAll()

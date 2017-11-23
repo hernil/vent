@@ -44,6 +44,9 @@
               },
             },
           },
+          credits: {
+            enabled: false,
+          },
           series: [{
             name: 'Brands',
             colorByPoint: true,

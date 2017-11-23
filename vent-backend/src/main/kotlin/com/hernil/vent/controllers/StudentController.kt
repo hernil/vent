@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @CrossOrigin(origins = arrayOf("http://localhost:3000"))
 @RequestMapping("/student")
-class StudentResource(val repository: StudentRepository) {
+class StudentController(val repository: StudentRepository) {
 
     @GetMapping(value = "/all")
     fun getData() = repository.findAll()

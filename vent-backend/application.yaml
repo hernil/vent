@@ -14,18 +14,25 @@
 
 #spring.jpa.database=default
 
-datasource:
-  vent:
-    jdbc-url: jdbc:mysql://172.17.0.2:3306/protus?verifyServerCertificate=false&useSSL=true
-    #url: jdbc:mysql://172.17.0.2:3306/protus?verifyServerCertificate=false&useSSL=true
-    username: root
-    password: stockli
-    # driver-class-name: com.mysql.jdbc.Driver
     # validation-query: select 1
-  protus:
-    jdbc-url: jdbc:mysql://172.17.0.2:3306/vent?verifyServerCertificate=false&useSSL=true
-    #url: jdbc:mysql://172.17.0.2:3306/vent?verifyServerCertificate=false&useSSL=true
-    username: root
-    password: stockli
-    # driver-class-name: com.mysql.jdbc.Driver
-    # validation-query: select 1
+
+spring:
+  datasource:
+    vent:
+      jdbc-url: jdbc:mysql://172.17.0.2:3306/vent?verifyServerCertificate=false&useSSL=true
+      #url: jdbc:mysql://172.17.0.2:3306/protus?verifyServerCertificate=false&useSSL=true
+      username: root
+      password: stockli
+      driver-class-name: com.mysql.jdbc.Driver
+      # validation-query: select 1
+    protus:
+      jdbc-url: jdbc:mysql://172.17.0.2:3306/protus?verifyServerCertificate=false&useSSL=true
+      #url: jdbc:mysql://172.17.0.2:3306/vent?verifyServerCertificate=false&useSSL=true
+      username: root
+      password: stockli
+      driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        implicit-strategy: default #org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy

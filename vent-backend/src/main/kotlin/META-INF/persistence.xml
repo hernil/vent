@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
+
+    <persistence-unit name="NewPersistenceUnit">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>com.hernil.vent.protus.ActionTypeEntity</class>
+        <class>com.hernil.vent.protus.CoursesEntity</class>
+        <class>com.hernil.vent.protus.LearnersEntity</class>
+        <class>com.hernil.vent.protus.LearnersAnswersEntity</class>
+        <class>com.hernil.vent.protus.LessonsEntity</class>
+        <class>com.hernil.vent.protus.MessagesEntity</class>
+        <class>com.hernil.vent.protus.OfferedAnswersEntity</class>
+        <class>com.hernil.vent.protus.ResursEntity</class>
+        <class>com.hernil.vent.protus.SessionEntity</class>
+        <class>com.hernil.vent.protus.SettingsEntity</class>
+        <class>com.hernil.vent.protus.TagsEntity</class>
+        <class>com.hernil.vent.protus.TeachersEntity</class>
+        <class>com.hernil.vent.protus.TestEntity</class>
+        <class>com.hernil.vent.protus.UnitsEntity</class>
+        <class>com.hernil.vent.protus.UsersActionEntity</class>
+        <properties>
+            <property name="hibernate.connection.url" value="jdbc:mysql://172.17.0.2:3306/vent"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+            <property name="hibernate.connection.username" value=""/>
+            <property name="hibernate.connection.password" value=""/>
+            <property name="hibernate.archive.autodetection" value="class"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+</persistence>

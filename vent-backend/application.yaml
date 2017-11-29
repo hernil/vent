@@ -1,33 +1,13 @@
-# Default DB
-#spring.jpa.hibernate.ddl-auto=update
-#spring.datasource.url=jdbc:mysql://172.17.0.2:3306/protus?verifyServerCertificate=false&useSSL=true
-#spring.datasource.username=root
-#spring.datasource.password=stockli
-# spring.datasource.driver-class-name=com.mysql.jdbc.Driver
-
-# Protus DB
-#protus.jpa.hibernate.ddl-auto=update
-#protus.datasource.protus.url=jdbc:mysql://172.17.0.2:3306/protus?verifyServerCertificate=false&useSSL=true
-#protus.datasource.protus.username=root
-#protus.datasource.protus.password=stockli
-#protus.datasource.protus.driver-class-name=com.mysql.jdbc.Driver
-
-#spring.jpa.database=default
-
-    # validation-query: select 1
-
 spring:
   datasource:
     vent:
       jdbc-url: jdbc:mysql://172.17.0.2:3306/vent?verifyServerCertificate=false&useSSL=true
-      #url: jdbc:mysql://172.17.0.2:3306/protus?verifyServerCertificate=false&useSSL=true
       username: root
       password: stockli
       driver-class-name: com.mysql.jdbc.Driver
-      # validation-query: select 1
+      validation-query: select 1
     protus:
       jdbc-url: jdbc:mysql://172.17.0.2:3306/protus?verifyServerCertificate=false&useSSL=true
-      #url: jdbc:mysql://172.17.0.2:3306/vent?verifyServerCertificate=false&useSSL=true
       username: root
       password: stockli
       driver-class-name: com.mysql.jdbc.Driver

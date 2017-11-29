@@ -1,5 +1,6 @@
 package com.hernil.vent.application.domain
 
+import org.springframework.data.jpa.repository.JpaRepository
 import javax.persistence.*
 
 @Entity
@@ -10,3 +11,5 @@ data class Data(val name: String = "",
                 @Id
                 @GeneratedValue(strategy = GenerationType.AUTO)
                 val id: Long = 0)
+
+interface DataRepository : JpaRepository<Data, Long>

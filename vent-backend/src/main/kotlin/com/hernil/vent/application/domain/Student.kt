@@ -1,6 +1,6 @@
-package com.hernil.vent.domain
+package com.hernil.vent.application.domain
 
-import com.hernil.vent.domain.mappers.CourseStudents
+import com.hernil.vent.application.domain.mappers.CourseStudents
 import org.springframework.data.jpa.repository.JpaRepository
 import javax.persistence.*
 

@@ -1,4 +1,4 @@
-package com.hernil.vent.domain
+package com.hernil.vent.application.domain
 
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue

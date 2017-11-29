@@ -1,9 +1,9 @@
-package com.hernil.vent.domain.mappers
+package com.hernil.vent.application.domain.mappers
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import com.hernil.vent.domain.Course
-import com.hernil.vent.domain.Student
+import com.hernil.vent.application.domain.Course
+import com.hernil.vent.application.domain.Student
 import java.io.Serializable
 import javax.persistence.*
 

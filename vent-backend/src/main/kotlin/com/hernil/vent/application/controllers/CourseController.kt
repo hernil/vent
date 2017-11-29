@@ -1,6 +1,6 @@
-package com.hernil.vent.controllers
+package com.hernil.vent.application.controllers
 
-import com.hernil.vent.domain.CourseRepository
+import com.hernil.vent.application.domain.CourseRepository
 import org.springframework.web.bind.annotation.*
 
 @RestController

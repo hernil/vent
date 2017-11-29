@@ -1,4 +1,4 @@
-package com.hernil.vent.domain
+package com.hernil.vent.application.domain
 
 open class Person(open val name: String) {
     fun test() {

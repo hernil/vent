@@ -4,9 +4,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,7 +40,7 @@ public class VentConfig {
                 .dataSource(dataSource)
                 .packages("com.hernil.vent.application")
                 .persistenceUnit("vent")
-                .properties(jpaProperties.getHibernateProperties("dataSource"))
+                .properties(jpaProperties.getHibernateProperties(dataSource))
                 .build();
     }
 

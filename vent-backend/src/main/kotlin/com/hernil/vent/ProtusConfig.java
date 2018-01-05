@@ -4,8 +4,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
+import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,12 +32,13 @@ public class ProtusConfig {
 
     @Bean(name = "protusEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean protusEntityManagerFactory(
-            EntityManagerFactoryBuilder builder,
+            EntityManagerFactoryBuilder builder, JpaProperties jpaProperties,
             @Qualifier("protusDataSource") DataSource protusDataSource) {
         return builder
                 .dataSource(protusDataSource)
                 .packages("com.hernil.vent.protus")
                 .persistenceUnit("protus")
+                .properties(jpaProperties.getHibernateProperties(protusDataSource))
                 .build();
     }
 

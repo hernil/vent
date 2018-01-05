@@ -13,7 +13,7 @@ class DataResource(val repository: DataRepository) {
     fun getData() = repository.findAll()
 
     @GetMapping(value = "/{id}")
-    fun getDataById(@PathVariable id: Long) = repository.findById(id)
+    fun getDataById(@PathVariable id: Long) = repository.findOne(id)
 
     @GetMapping(value = "/insert/{name}")
     fun insertData(@PathVariable name: String,

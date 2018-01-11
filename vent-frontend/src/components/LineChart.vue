@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vue-highcharts :options="options" ref="lineCharts"></vue-highcharts>
+    <highcharts :options="options" ref="lineCharts"></highcharts>
     <!--<button @click="load">load</button>-->
   </div>
 </template>
@@ -9,8 +9,11 @@
   /* eslint-disable no-console,prefer-const,spaced-comment */
 
   import axios from 'axios';
-  import VueHighcharts from 'vue2-highcharts';
+  import Vue from 'vue';
+  import VueHighcharts from 'vue-highcharts';
+  import Highcharts from 'highcharts';
 
+  Vue.use(VueHighcharts, { Highcharts });
   export default {
     components: {
       VueHighcharts,
@@ -83,7 +86,7 @@
       const lineCharts = this.$refs.lineCharts;
       const url = 'http://localhost:8080/data/1';
       axios.get(url).then((response) => {
-        lineCharts.addSeries(response.data);
+        lineCharts.chart.addSeries(response.data);
       });
     },
   };

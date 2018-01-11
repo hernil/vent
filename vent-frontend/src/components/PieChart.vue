@@ -10,7 +10,11 @@
 
   import axios from 'axios';
   import VueHighcharts from 'vue-highcharts';
+  import Highcharts from 'highcharts';
 
+  import loadDrilldown from 'highcharts/modules/drilldown';
+
+  loadDrilldown(Highcharts);
 
   export default {
     components: {

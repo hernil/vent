@@ -12,6 +12,9 @@
         <BarChartView/>
       </div>
     </div>
+    <div class="pure-u-1 pure-u-lg-1-3">
+      <SpiderChartView/>
+    </div>
   </div>
 </template>
 
@@ -20,6 +23,7 @@
   import LineChartView from './LineChart';
   import PieChartView from './PieChart';
   import BarChartView from './BarChart';
+  import SpiderChartView from './SpiderChart';
 
   export default {
     name: 'HelloWorld',
@@ -27,6 +31,7 @@
       LineChartView,
       PieChartView,
       BarChartView,
+      SpiderChartView,
     },
     data() {
       return {

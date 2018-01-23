@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="pure-g">
-      <div class="pure-u-lg-3-24 pure-u-xl-2-24">
+      <div class="pure-u-lg-4-24 pure-u-xl-3-24">
         <div class="pure-menu custom-restricted-width">
           <span class="pure-menu-heading">Dashboard views</span>
 
@@ -14,7 +14,7 @@
           </ul>
         </div>
       </div>
-      <div class="pure-u-lg-21-24 pure-u-xl-22-24">
+      <div class="pure-u-lg-20-24 pure-u-xl-21-24">
         <router-view/>
       </div>
     </div>

@@ -70,7 +70,7 @@ class MasteryParser(inputData: JSONObject) {
                             aSeq = activityObject.getJSONObject("values").getString("aSeq")
                     ))
 
-                    list.add(Activity(name = name, values = values, sequencing = activityObject.getDouble("sequencing")))
+                    list.add(Activity(name = activity, values = values, sequencing = activityObject.getDouble("sequencing")))
                 }
 
 

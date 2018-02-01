@@ -1,41 +1,61 @@
 package com.hernil.vent.application.domain.mastery.parsers
 
 import com.hernil.vent.application.domain.mastery.*
+import com.hernil.vent.application.utils.logger
 import org.json.JSONObject
 
 class MasteryParser(inputData: JSONObject) {
+
+    val log by logger()
 
     val parsedData: Learner = Learner(
             id = inputData.getString("id"),
             name = inputData.getString("name"),
             topics = topicGenerator(inputData.getJSONObject("state").getJSONObject("topics")),
-            activities = activityGenerator(inputData.getJSONObject("state").getJSONObject("activities")))
+            activityTopic = activityGenerator(inputData.getJSONObject("state").getJSONObject("activities")))
 
     fun topicGenerator(topics: JSONObject): MutableList<Topic> {
         val topicList: MutableList<Topic> = mutableListOf()
 
-        topics.keys().forEach {
-            var topic = topics.getJSONObject(it)
-            var overall_knowledge = topic.getJSONObject("overall").getDouble("k")
-            var overall_progress = topic.getJSONObject("overall").getInt("p") == 1
-            var sequencing: MutableList<TopicSequencing> = mutableListOf()
-
-            var sl = topic.getJSONObject("sequencing")
-            sl.keys().forEach { topic ->
-                sequencing.add(TopicSequencing(type = topic, value = sl.getDouble(topic)))
+        fun sequencingValuesGenerator(sequencingValuesContainer: JSONObject): MutableList<TopicSequencing> {
+            val sequencing: MutableList<TopicSequencing> = mutableListOf()
+            log.debug("Parsing sequencing values for: " + sequencingValuesContainer)
+            sequencingValuesContainer.keys().forEach { activityType ->
+                log.debug("ActivityType: " + activityType)
+                sequencing.add(
+                        TopicSequencing(
+                                type = activityType,
+                                value = sequencingValuesContainer.getDouble(activityType)))
             }
+            return sequencing
+        }
 
-            var valueList: MutableList<TopicValue> = mutableListOf()
+        fun valuesGenerator(valuesContainer: JSONObject): MutableList<TopicValue> {
+            val values: MutableList<TopicValue> = mutableListOf()
 
-            var jsonValues = topic.getJSONObject("values")
-
-            jsonValues.keys().forEach {
-                valueList.add(TopicValue(type = it as String, knowledge = jsonValues.getJSONObject(it).getDouble("k")))
+            valuesContainer.keys().forEach { activityType ->
+                log.debug("Parsing topic values for: " + activityType)
+                values.add(
+                        TopicValue(
+                                type = activityType as String,
+                                knowledge = valuesContainer.getJSONObject(activityType).getDouble("k"),
+                                progress = valuesContainer.getJSONObject(activityType).getInt("p") == 1))
             }
+            return values
+        }
+
+        topics.keys().forEach {topicName ->
+            log.debug("Creating topic object for: " + topicName)
+            val topic = topics.getJSONObject(topicName)
+            val overall_knowledge = topic.getJSONObject("overall").getDouble("k")
+            val overall_progress = topic.getJSONObject("overall").getInt("p") == 1
+
+            val sequencing = sequencingValuesGenerator(topic.getJSONObject("sequencing"))
+            val valueList: MutableList<TopicValue> = valuesGenerator(topic.getJSONObject("values"))
 
             topicList.add(
                     Topic(
-                            description = it as String,
+                            description = topicName as String,
                             values = valueList, sequencing = sequencing,
                             overallKnowledge = overall_knowledge,
                             overallProgress = overall_progress

@@ -11,13 +11,13 @@ class MasteryParser(inputData: JSONObject) {
     val parsedData: Learner = Learner(
             id = inputData.getString("id"),
             name = inputData.getString("name"),
-            topics = topicGenerator(inputData.getJSONObject("state").getJSONObject("topics")),
-            activityTopic = activityGenerator(inputData.getJSONObject("state").getJSONObject("activities")))
+            topics = generateTopics(inputData.getJSONObject("state").getJSONObject("topics")),
+            activityTopic = generateActivities(inputData.getJSONObject("state").getJSONObject("activities")))
 
-    fun topicGenerator(topics: JSONObject): MutableList<Topic> {
+    fun generateTopics(topics: JSONObject): MutableList<Topic> {
         val topicList: MutableList<Topic> = mutableListOf()
 
-        fun sequencingValuesGenerator(sequencingValuesContainer: JSONObject): MutableList<TopicSequencing> {
+        fun generateSequencingValues(sequencingValuesContainer: JSONObject): MutableList<TopicSequencing> {
             val sequencing: MutableList<TopicSequencing> = mutableListOf()
             log.debug("Parsing sequencing values for: " + sequencingValuesContainer)
             sequencingValuesContainer.keys().forEach { activityType ->
@@ -30,7 +30,7 @@ class MasteryParser(inputData: JSONObject) {
             return sequencing
         }
 
-        fun valuesGenerator(valuesContainer: JSONObject): MutableList<TopicValue> {
+        fun generateValues(valuesContainer: JSONObject): MutableList<TopicValue> {
             val values: MutableList<TopicValue> = mutableListOf()
 
             valuesContainer.keys().forEach { activityType ->
@@ -50,8 +50,8 @@ class MasteryParser(inputData: JSONObject) {
             val overall_knowledge = topic.getJSONObject("overall").getDouble("k")
             val overall_progress = topic.getJSONObject("overall").getInt("p") == 1
 
-            val sequencing = sequencingValuesGenerator(topic.getJSONObject("sequencing"))
-            val valueList: MutableList<TopicValue> = valuesGenerator(topic.getJSONObject("values"))
+            val sequencing = generateSequencingValues(topic.getJSONObject("sequencing"))
+            val valueList: MutableList<TopicValue> = generateValues(topic.getJSONObject("values"))
 
             topicList.add(
                     Topic(
@@ -67,42 +67,36 @@ class MasteryParser(inputData: JSONObject) {
         return topicList
     }
 
-    fun activityGenerator(activities: JSONObject): MutableList<ActivityTopic> {
+    fun generateActivities(inputData: JSONObject): MutableList<ActivityTopic> {
         val activityTopicList: MutableList<ActivityTopic> = mutableListOf()
 
-        fun generateTopicActivities(name: String): MutableList<Activity> {
-            var ac = activities.getJSONObject(name)
-            var list: MutableList<Activity> = mutableListOf()
-            ac.keys().forEach { type ->
+        fun generateTopicActivities(topic: String): MutableList<Activity> {
+            log.debug("Generating activities for topic: " + topic)
+            var topicActivities = inputData.getJSONObject(topic)
+            var activitiesList: MutableList<Activity> = mutableListOf()
+            topicActivities.keys().forEach { type ->
+                log.debug("Looping through: " + type)
+                val activities = topicActivities.getJSONObject(type)
 
-                val types = ac.getJSONObject(type as String)
-
-                types.keys().forEach { activity ->
-                    val activityObject = types.getJSONObject(activity as String)
-                    val values: MutableList<ActivityValue> = mutableListOf()
-
-                    values.add(ActivityValue(
-                            knowledge = activityObject.getJSONObject("values").getDouble("k"),
-                            progress = activityObject.getJSONObject("values").getInt("p") == 1,
-                            a = activityObject.getJSONObject("values").getDouble("a"),
-                            s = activityObject.getJSONObject("values").getDouble("s"),
-                            t = activityObject.getJSONObject("values").getDouble("t"),
-                            aSeq = activityObject.getJSONObject("values").getString("aSeq")
-                    ))
-
-                    list.add(Activity(name = activity, values = values, sequencing = activityObject.getDouble("sequencing")))
+                activities.keys().forEach { activity ->
+                    log.debug("Generating acitivty: " + activity)
+                    val activityObject = activities.getJSONObject(activity)
+                    val activityValues = activityObject.getJSONObject("values")
+                    val values = ActivityValue(
+                            knowledge = activityValues.getDouble("k"),
+                            progress = activityValues.getInt("p") == 1,
+                            a = activityValues.getDouble("a"),
+                            s = activityValues.getDouble("s"),
+                            t = activityValues.getDouble("t"),
+                            aSeq = activityValues.getString("aSeq")
+                    )
+                    activitiesList.add(Activity(name = activity, type = type, values = values, sequencing = activityObject.getDouble("sequencing")))
                 }
-
-
             }
-            return list
+            return activitiesList
         }
-
-        activities.keys().forEach { activity ->
-
-            activityTopicList.add(ActivityTopic(name = activity, activities = generateTopicActivities(activity)))
-
-
+        inputData.keys().forEach { activityTopic ->
+            activityTopicList.add(ActivityTopic(name = activityTopic, activities = generateTopicActivities(activityTopic)))
         }
 
         return activityTopicList

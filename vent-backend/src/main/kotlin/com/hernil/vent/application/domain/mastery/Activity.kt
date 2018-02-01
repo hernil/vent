@@ -18,8 +18,9 @@ data class Activity(
         @GeneratedValue(strategy = GenerationType.AUTO)
         private val id: Long = 0,
         val name: String = "",
-        @OneToMany(cascade = [CascadeType.ALL])
-        var values: List<ActivityValue> = mutableListOf(),
+        val type: String = "",
+        @OneToOne(cascade = [CascadeType.ALL])
+        var values: ActivityValue? = null,
         var sequencing: Double = 0.0
 ) {
 }

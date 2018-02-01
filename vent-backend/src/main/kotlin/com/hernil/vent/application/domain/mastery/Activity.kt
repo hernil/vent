@@ -20,8 +20,8 @@ data class Activity(
         val name: String = "",
         val type: String = "",
         @OneToOne(cascade = [CascadeType.ALL])
-        var values: ActivityValue? = null,
-        var sequencing: Double = 0.0
+        val values: ActivityValue? = null,
+        val sequencing: Double = 0.0
 ) {
 }
 
@@ -30,10 +30,10 @@ data class ActivityValue(
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         private val id: Long = 0,
-        var knowledge: Double = 0.0,
-        var progress: Boolean = false,
-        var a: Double = 0.0,
-        var s: Double = 0.0,
-        var t: Double = 0.0,
-        var aSeq: String = ""
+        val knowledge: Double = 0.0,
+        val progress: Boolean = false,
+        val a: Double = 0.0,
+        val s: Double = 0.0,
+        val t: Double = 0.0,
+        val aSeq: String = ""
 )

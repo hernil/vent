@@ -9,7 +9,7 @@ data class ActivityTopic(
         private val id: Long = 0,
         val name: String = "",
         @OneToMany(cascade = [CascadeType.ALL])
-        val activities: MutableList<Activity> = mutableListOf()
+        val activities: List<Activity> = mutableListOf()
 )
 
 @Entity

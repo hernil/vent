@@ -13,7 +13,7 @@ data class Learner(
         @OneToMany(cascade = [CascadeType.ALL])
         var topics: List<Topic> = mutableListOf(),
         @OneToMany(cascade = [CascadeType.ALL])
-        var activityTopic: MutableList<ActivityTopic> = mutableListOf()
+        var activityTopic: List<ActivityTopic> = mutableListOf()
 )
 
 interface MasteryLearnerRepository : JpaRepository<Learner, Long>

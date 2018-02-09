@@ -6,6 +6,12 @@ spring:
       password: ${MYSQL_DB_PASSWORD}
       driver-class-name: com.mysql.jdbc.Driver
       validation-query: select 1
+    mastery:
+      url: jdbc:mysql://172.17.0.2:3306/mastery?verifyServerCertificate=false&useSSL=true
+      username: root
+      password: ${MYSQL_DB_PASSWORD}
+      driver-class-name: com.mysql.jdbc.Driver
+      validation-query: select 1
     protus:
       url: jdbc:mysql://172.17.0.2:3306/protus?verifyServerCertificate=false&useSSL=true
       username: root

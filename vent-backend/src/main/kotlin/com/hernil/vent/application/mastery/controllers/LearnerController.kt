@@ -4,13 +4,14 @@ import com.hernil.vent.application.mastery.domain.Learner
 import com.hernil.vent.application.mastery.domain.MasteryLearnerRepository
 import com.hernil.vent.application.mastery.utils.fetchAllLearnersByUrl
 import com.hernil.vent.application.mastery.utils.fetchOneLearnerByUrl
+import com.hernil.vent.application.protus.domain.LearnersRepository
 import org.springframework.web.bind.annotation.*
 import java.net.URL
 
 @RestController
 @CrossOrigin(origins = arrayOf("http://localhost:3000"))
 @RequestMapping("/masteryLearner")
-class MasteryLearnerResource(val repository: MasteryLearnerRepository) {
+class MasteryLearnerResource(val repository: MasteryLearnerRepository, val protusRepo: LearnersRepository) {
 
     @GetMapping(value = "/all")
     fun getData() = repository.findAll()
@@ -18,12 +19,10 @@ class MasteryLearnerResource(val repository: MasteryLearnerRepository) {
     @GetMapping(value = "/hardAll")
     fun getAllData(): MutableList<Learner>? {
         println("Hello!")
-        var url = "http://adapt2.sis.pitt.edu/aggregate2/GetContentLevels?grp=NorwaySpring2018&mod=user&sid=TEST&cid=352&usr=norway"
-        var urls = mutableListOf<URL>()
-        for (n in 1..15) {
-            val s = url + n.toString()
-            urls.add(URL(s))
-        }
+        var url = "http://adapt2.sis.pitt.edu/aggregate2/GetContentLevels?grp=NorwaySpring2018&mod=user&sid=TEST&cid=352&usr="
+        val urls = protusRepo.findAll()
+                .map { url + it.masteryId }
+                .map { URL(it) }
         repository.save(fetchAllLearnersByUrl(urls))
         return repository.findAll()
     }

@@ -50,9 +50,21 @@ data class LearnersEntity(
         var resurs: Int = 0,
         @get:Basic
         @get:Column(name = "course")
-        var course: Int? = null
+        var course: Int? = null,
+        @get:Basic
+        @get:Column(name = "masteryID")
+        var masteryId: String? = null,
+        @get:Basic
+        @get:Column(name = "ELOrating")
+        var elOrating: Int? = null,
+        @get:Basic
+        @get:Column(name = "iteraction_num")
+        var iteractionNum: Int? = null,
+        @Basic
+        @Column(name = "k_factor")
+        private var kFactor: Int? = null
 ) {
 
 }
 
-interface LearnersRepository : JpaRepository<LearnersEntity, Long>
+interface LearnersRepository : JpaRepository<LearnersEntity, Int>

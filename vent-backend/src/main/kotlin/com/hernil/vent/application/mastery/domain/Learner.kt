@@ -6,8 +6,6 @@ import javax.persistence.*
 @Entity
 data class Learner(
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        private val dId: Long = 0,
         val id: String = "",
         val name: String = "",
         @OneToMany(cascade = [CascadeType.ALL])

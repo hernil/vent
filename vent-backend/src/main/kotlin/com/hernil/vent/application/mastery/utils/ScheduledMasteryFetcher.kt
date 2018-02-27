@@ -3,6 +3,7 @@ package com.hernil.vent.application.mastery.utils
 import com.hernil.vent.application.mastery.domain.MasteryLearnerRepository
 import com.hernil.vent.application.protus.domain.LearnersRepository
 import com.hernil.vent.application.utils.logger
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import java.net.URL
@@ -12,20 +13,31 @@ class ScheduledMasteryFetcher(val repository: MasteryLearnerRepository, val prot
 
     val log by logger()
 
+    @Value("\${mastery_endpoint}")
+    val masteryEndpoint: String = ""
+
     //@Scheduled(fixedDelay = 300000)
     fun task() {
         log.info("Started scheduled fetching of mastery data")
-        var url = "http://adapt2.sis.pitt.edu/aggregate2/GetContentLevels?grp=NorwaySpring2018&mod=user&sid=TEST&cid=352&usr="
         val urls = protusRepo.findAll()
                 .map {
                     log.debug("masteryID: ${it.masteryId}")
-                    URL(url + it.masteryId) }
+                    URL(masteryEndpoint + it.masteryId) }
 
-        repository.save(fetchAllLearnersByUrl(urls))
+        val learners = fetchAllLearnersByUrl(urls)
+        learners.forEach { updatedLearner ->
+            try {
+                val learner = repository.findById(updatedLearner.id)
+                log.info("Updating mastery user: ${learner.id}")
+                learner.topics = updatedLearner.topics
+                learner.activityTopic = updatedLearner.activityTopic
+            }catch (e: NullPointerException) {
+                log.info("User ${updatedLearner.id} is not in the database.")
+                repository.save(updatedLearner)
+                log.info("Created user ${updatedLearner.id} in the database.")
+            }
+        }
         log.info("Mastery database succesfully updated")
     }
 
-    fun test() {
-        log.info("testlog")
-    }
 }

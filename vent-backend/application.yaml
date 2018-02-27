@@ -23,3 +23,5 @@ spring:
       ddl-auto: update
       naming:
         implicit-strategy: default #org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy
+
+mastery_endpoint: http://adapt2.sis.pitt.edu/aggregate2/GetContentLevels?grp=NorwaySpring2018&mod=user&sid=TEST&cid=352&usr=

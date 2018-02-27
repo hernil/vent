@@ -5,6 +5,8 @@ import com.hernil.vent.application.mastery.domain.MasteryLearnerRepository
 import com.hernil.vent.application.mastery.utils.fetchAllLearnersByUrl
 import com.hernil.vent.application.mastery.utils.fetchOneLearnerByUrl
 import com.hernil.vent.application.protus.domain.LearnersRepository
+import com.hernil.vent.application.utils.logger
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.*
 import java.net.URL
 
@@ -13,29 +15,32 @@ import java.net.URL
 @RequestMapping("/masteryLearner")
 class MasteryLearnerResource(val repository: MasteryLearnerRepository, val protusRepo: LearnersRepository) {
 
-    @GetMapping(value = "/all")
-    fun getData() = repository.findAll()
+    val log by logger()
 
-    @GetMapping(value = "/hardAll")
-    fun getAllData(): MutableList<Learner>? {
-        println("Hello!")
-        var url = "http://adapt2.sis.pitt.edu/aggregate2/GetContentLevels?grp=NorwaySpring2018&mod=user&sid=TEST&cid=352&usr="
-        val urls = protusRepo.findAll()
-                .map { url + it.masteryId }
-                .map { URL(it) }
-        repository.save(fetchAllLearnersByUrl(urls))
-        return repository.findAll()
-    }
+    @Value("\${mastery_endpoint}")
+    val masteryEndpoint: String = ""
+
+    @GetMapping(value = "/all")
+    fun getUsers() = repository.findAll()
 
     @GetMapping(value = "/{id}")
-    fun getDataById(@PathVariable id: Long) = repository.findOne(id)
+    fun getUserById(@PathVariable id: String) = repository.findById(id)
 
-    @GetMapping(value = "/insert/{name}")
-    fun insertData(@PathVariable name: String): List<Learner> {
+    @GetMapping(value = "/update/{id}")
+    fun updateUser(@PathVariable id: String): Learner {
 
-        val learner = fetchOneLearnerByUrl(URL("http://adapt2.sis.pitt.edu/aggregate2/GetContentLevels?usr=norway1&grp=NorwaySpring2018&mod=user&sid=TEST&cid=352"))
-        repository.save(learner)
-        return repository.findAll()
+        val updatedLearner = fetchOneLearnerByUrl(URL(masteryEndpoint + id))
+        try {
+            val learner = repository.findById(updatedLearner.id)
+            log.info("Updating mastery user: ${learner.id}")
+            learner.topics = updatedLearner.topics
+            learner.activityTopic = updatedLearner.activityTopic
+        }catch (e: NullPointerException) {
+            log.info("User ${updatedLearner.id} is not in the database.")
+            repository.save(updatedLearner)
+            log.info("Created user ${updatedLearner.id} in the database.")
+        }
+        return updatedLearner
     }
 }
 

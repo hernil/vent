@@ -83,14 +83,14 @@ class MasteryParser(inputData: JSONObject) {
                     val activityObject = activities.getJSONObject(activity)
                     val activityValues = activityObject.getJSONObject("values")
                     val values = ActivityValue(
-                            knowledge = activityValues.getDouble("k"),
-                            progress = activityValues.getInt("p") == 1,
-                            a = activityValues.getDouble("a"),
-                            s = activityValues.getDouble("s"),
-                            t = activityValues.getDouble("t"),
-                            aSeq = activityValues.getString("aSeq")
+                            knowledge = activityValues.optDouble("k", 0.0),
+                            progress = activityValues.optInt("p", 0) == 1,
+                            a = activityValues.optDouble("a", 0.0),
+                            s = activityValues.optDouble("s", 0.0),
+                            t = activityValues.optDouble("t", 0.0),
+                            aSeq = activityValues.optString("aSeq", "")
                     )
-                    activitiesList.add(Activity(name = activity, type = type, values = values, sequencing = activityObject.getDouble("sequencing")))
+                    activitiesList.add(Activity(name = activity, type = type, values = values, sequencing = activityObject.optDouble("sequencing")))
                 }
             }
             return activitiesList

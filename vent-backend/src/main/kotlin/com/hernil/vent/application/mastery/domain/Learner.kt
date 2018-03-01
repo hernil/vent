@@ -11,9 +11,11 @@ data class Learner(
         val id: String = "",
         val name: String = "",
         @OneToMany(cascade = [CascadeType.ALL])
-        val topics: List<Topic> = mutableListOf(),
+        var topics: List<Topic> = mutableListOf(),
         @OneToMany(cascade = [CascadeType.ALL])
-        val activityTopic: List<ActivityTopic> = mutableListOf()
+        var activityTopic: List<ActivityTopic> = mutableListOf()
 )
 
-interface MasteryLearnerRepository : JpaRepository<Learner, Long>
+interface MasteryLearnerRepository : JpaRepository<Learner, Long> {
+        fun findById(id: String): Learner
+}

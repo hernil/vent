@@ -27,7 +27,7 @@
             type: 'solidgauge',
           },
 
-          title: null,
+          title: 'Arraylist',
 
           pane: {
             center: ['50%', '85%'],
@@ -59,7 +59,8 @@
             minorTickInterval: null,
             tickAmount: 2,
             title: {
-              y: -70,
+              text: 'Arraylist',
+              y: -110,
             },
             labels: {
               y: 16,
@@ -83,8 +84,8 @@
             data: [80],
             dataLabels: {
               format: '<div style="text-align:center"><span style="font-size:25px;color:' +
-              ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
-              '<span style="font-size:12px;color:silver">%</span></div>',
+              ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span>' +
+              '<span style="font-size:25px">%</span></div>',
             },
             tooltip: {
               valueSuffix: ' %',
@@ -95,7 +96,7 @@
     },
     mounted() {
       //const pieCharts = this.$refs.pieCharts;
-      const url = 'http://localhost:8080/data/20';
+      const url = 'http://localhost:8080/data/1';
       axios.get(url).then((response) => {
         //pieCharts.addSeries(response.data);
         console.log(response.data);

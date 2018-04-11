@@ -15,6 +15,9 @@
     <div class="pure-u-1 pure-u-lg-1-3">
       <SpiderChartView/>
     </div>
+    <div class="pure-u-1 pure-u-lg-1-3">
+      <SolidGaugeView/>
+    </div>
   </div>
 </template>
 
@@ -24,6 +27,7 @@
   import PieChartView from './charts/PieChart';
   import BarChartView from './charts/BarChart';
   import SpiderChartView from './charts/SpiderChart';
+  import SolidGaugeView from './charts/SolidGauge';
 
   export default {
     name: 'Default',
@@ -32,6 +36,7 @@
       PieChartView,
       BarChartView,
       SpiderChartView,
+      SolidGaugeView,
     },
     data() {
       return {

@@ -152,7 +152,7 @@
     },
     mounted() {
       //const pieCharts = this.$refs.pieCharts;
-      const url = 'http://localhost:8080/data/20';
+      const url = 'http://localhost:8080/data/1';
       axios.get(url).then((response) => {
         //pieCharts.addSeries(response.data);
         console.log(response.data);

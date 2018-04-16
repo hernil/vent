@@ -8,7 +8,6 @@
 <script>
   /* eslint-disable no-console,prefer-const,spaced-comment, prefer-template */
 
-  import axios from 'axios';
   import VueHighcharts from 'vue-highcharts';
   import Highcharts from 'highcharts';
 
@@ -20,6 +19,17 @@
     components: {
       VueHighcharts,
     },
+    props: {
+      title: {
+        type: String,
+        default: '',
+      },
+      value: {
+        type: Number,
+        required: false,
+        default: 0.42,
+      },
+    },
     data() {
       return {
         options: {
@@ -27,11 +37,11 @@
             type: 'solidgauge',
           },
 
-          title: 'Arraylist',
+          title: this.title,
 
           pane: {
             center: ['50%', '85%'],
-            size: '100%',
+            size: '70%',
             startAngle: -90,
             endAngle: 90,
             background: {
@@ -59,7 +69,7 @@
             minorTickInterval: null,
             tickAmount: 2,
             title: {
-              text: 'Arraylist',
+              text: this.title,
               y: -110,
             },
             labels: {
@@ -81,7 +91,7 @@
           },
           series: [{
             name: 'Percentage used',
-            data: [80],
+            data: [Math.round(this.value * 1000) / 10],
             dataLabels: {
               format: '<div style="text-align:center"><span style="font-size:25px;color:' +
               ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span>' +
@@ -93,14 +103,6 @@
           }],
         },
       };
-    },
-    mounted() {
-      //const pieCharts = this.$refs.pieCharts;
-      const url = 'http://localhost:8080/data/1';
-      axios.get(url).then((response) => {
-        //pieCharts.addSeries(response.data);
-        console.log(response.data);
-      });
     },
   };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="pure-g">
     <div v-for="unit in parsedUnits" class="pure-u-sm-1-2 pure-u-lg-1-4">
-      <solid-gauge :title=unit.topic :value=unit.completed></solid-gauge>
+      <solid-gauge :title=unit.type :value=unit.completed></solid-gauge>
     </div>
   </div>
 </template>

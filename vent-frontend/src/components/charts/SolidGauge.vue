@@ -35,13 +35,14 @@
         options: {
           chart: {
             type: 'solidgauge',
+            height: '75%',
           },
 
           title: this.title,
 
           pane: {
             center: ['50%', '85%'],
-            size: '70%',
+            size: '100%',
             startAngle: -90,
             endAngle: 90,
             background: {

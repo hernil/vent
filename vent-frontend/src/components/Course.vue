@@ -1,33 +1,30 @@
 <template>
   <div>
-    <c-usage-type :units=course.units></c-usage-type>
     <pre>{{ course.id }}</pre>
+    <c-usage-type :units=course.units></c-usage-type>
   </div>
 </template>
 
 <script>
-  /* eslint-disable no-console */
 
   import axios from 'axios';
-  import CUsageType from './subviews/CUsageType';
+  import ContentUsageByType from './subviews/ContentUsageByType';
 
   export default {
-    components: { CUsageType },
+    components: { CUsageType: ContentUsageByType },
     data() {
       return {
-        course: ['test'],
+        course: [],
         errors: [],
       };
     },
-    beforeMount() {
+    mounted() {
       const url = 'http://localhost:8080/course/TDT4100';
       axios.get(url).then((response) => {
         this.course = response.data;
-        console.log('fetched');
       })
       .catch((e) => {
         this.errors.push(e);
-        console.log(e);
       });
     },
   };

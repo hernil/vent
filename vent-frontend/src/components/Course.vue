@@ -1,7 +1,14 @@
 <template>
   <div>
     <pre>{{ course.id }}</pre>
+    <h2>Content usage by type:</h2>
     <c-usage-type :units=course.units></c-usage-type>
+    <h2>Content usage by topic:</h2>
+    <c-usage-topic :units=course.units></c-usage-topic>
+    <h2>Content completion by type:</h2>
+    <c-completion-type :units=course.units></c-completion-type>
+    <h2>Content completion by topic:</h2>
+    <c-completion-topic :units=course.units></c-completion-topic>
   </div>
 </template>
 
@@ -9,9 +16,17 @@
 
   import axios from 'axios';
   import ContentUsageByType from './subviews/ContentUsageByType';
+  import ContentUsageByTopic from './subviews/ContentUsageByTopic';
+  import ContentCompletionByType from './subviews/ContentCompletionByType';
+  import ContentCompletionByTopic from './subviews/ContentCompletionByTopic';
 
   export default {
-    components: { CUsageType: ContentUsageByType },
+    components: {
+      CUsageType: ContentUsageByType,
+      CUsageTopic: ContentUsageByTopic,
+      CCompletionType: ContentCompletionByType,
+      CCompletionTopic: ContentCompletionByTopic,
+    },
     data() {
       return {
         course: [],

@@ -29,7 +29,8 @@ data class CourseUnit(
         val completed: Double = 0.0,
         val recommended: Double = 0.0,
         override val timeSpent: Int = 0,
-        override val performance: Double = 0.0
+        override val performance: Double = 0.0,
+        val expectedPerformance: Double = 0.0
         ) : Unit {
 
 }

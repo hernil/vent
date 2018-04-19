@@ -1,13 +1,13 @@
 <template>
   <div>
-    <highcharts :options="options" ref="spiderCharts"></highcharts>
+    <div v-if=this.categories>
+      <highcharts :options="options" ref="spiderCharts"></highcharts>
     <!--<button @click="load">load</button>-->
+    </div>
   </div>
 </template>
 
 <script>
-  /* eslint-disable no-console,prefer-const,spaced-comment,no-unused-vars,object-shorthand,no-undef */
-  import axios from 'axios';
   import Highcharts from 'highcharts';
   import loadHighchartsMore from 'highcharts/highcharts-more';
   import VueHighcharts from 'vue-highcharts';
@@ -17,6 +17,28 @@
   export default {
     components: {
       VueHighcharts,
+    },
+    props: {
+      categories: {
+        type: Array,
+        default: ['test'],
+        required: true,
+      },
+      expected: {
+        type: Array,
+        default: [10],
+        required: true,
+      },
+      actual: {
+        type: Array,
+        default: [9],
+        required: true,
+      },
+    },
+    watch: {
+      categories(val) { this.options.xAxis.categories = val; },
+      expected(val) { this.options.series[0].data = val; },
+      actual(val) { this.options.series[1].data = val; },
     },
     data() {
       return {
@@ -36,8 +58,7 @@
           },
 
           xAxis: {
-            categories: ['Sales', 'Marketing', 'Development', 'Customer Support',
-              'Information Technology', 'Administration'],
+            categories: this.categories,
             tickmarkPlacement: 'on',
             lineWidth: 0,
           },
@@ -50,8 +71,6 @@
 
           tooltip: {
             shared: true,
-            //pointFormat: '<span style="color:{series.color}"
-            // >{series.name}: <b>${point.y:,.0f}</b><br/>',
           },
 
           legend: {
@@ -62,24 +81,16 @@
           },
 
           series: [{
-            name: 'Allocated Budget',
-            data: [43000, 19000, 60000, 35000, 17000, 10000],
+            name: 'Performance',
+            data: this.actual,
             pointPlacement: 'on',
           }, {
-            name: 'Actual Spending',
-            data: [50000, 39000, 42000, 31000, 26000, 14000],
+            name: 'Expected',
+            data: this.expected,
             pointPlacement: 'on',
           }],
         },
       };
-    },
-    mounted() {
-      //HighchartsMore(VueHighcharts.Highcharts);
-      const spiderCharts = this.$refs.spiderCharts;
-      const url = 'http://localhost:8080/data/1';
-      axios.get(url).then((response) => {
-        //spiderCharts.chart.addSeries(response.data);
-      });
     },
   };
 </script>

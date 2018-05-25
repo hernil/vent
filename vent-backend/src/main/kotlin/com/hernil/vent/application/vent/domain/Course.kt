@@ -1,18 +1,23 @@
 package com.hernil.vent.application.vent.domain
 
-import com.hernil.vent.application.vent.domain.mappers.CourseStudents
+import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.data.jpa.repository.JpaRepository
 import javax.persistence.*
 
 @Entity
 data class Course(@Id
+                  @JsonIgnore
                   @GeneratedValue(strategy = GenerationType.AUTO)
-                  val id: Long = 0,
-                  val code: String = "",
+                  val did: Long = 0,
+                  val id: String = "",
                   val name: String = "",
-                  @OneToMany(mappedBy = "course")
-                  var students: List<CourseStudents> = mutableListOf()
+                  @OneToMany(cascade = arrayOf(CascadeType.ALL))
+                  val units: MutableList<CourseUnit> = mutableListOf(),
+                  @OneToMany(cascade = arrayOf(CascadeType.ALL))
+                  var students: MutableList<Student> = mutableListOf()
 ) {
 }
 
-interface CourseRepository : JpaRepository<Course, Long>
+interface CourseRepository : JpaRepository<Course, Long> {
+    fun findById(id: String): Course
+}

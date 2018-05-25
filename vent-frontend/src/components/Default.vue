@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ data.content }}</h1>
+    <h1>{{ data.course }}</h1>
     <div class="pure-g">
       <div class="pure-u-1 pure-u-lg-1-3">
         <LineChartView/>
@@ -40,7 +40,7 @@
     },
     data() {
       return {
-        data: { content: 'Hei verden!' },
+        data: { course: 'Hei verden!' },
         errors: [],
       };
     },

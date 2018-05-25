@@ -1,6 +1,6 @@
 <template>
   <div v-if=this.categories>
-    <spider-chart :categories=this.categories :expected=this.expected :actual=this.actual></spider-chart>
+    <spider-chart :title="'Expected vs. Actual performance'" :categories=this.categories :expected=this.expected :actual=this.actual></spider-chart>
   </div>
 </template>
 

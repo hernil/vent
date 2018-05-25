@@ -19,6 +19,11 @@
       VueHighcharts,
     },
     props: {
+      title: {
+        type: String,
+        default: 'Spiderchart',
+        required: true,
+      },
       categories: {
         type: Array,
         default: ['test'],
@@ -49,7 +54,7 @@
           },
 
           title: {
-            text: 'Budget vs spending',
+            text: this.title,
             x: -80,
           },
 
@@ -81,7 +86,7 @@
           },
 
           series: [{
-            name: 'Performance',
+            name: 'Actual',
             data: this.actual,
             pointPlacement: 'on',
           }, {

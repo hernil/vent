@@ -1,28 +1,5 @@
 <template>
   <div>
-
-    <button id="show-modal" @click="showModal = true">Load data</button>
-    <!-- use the modal component, pass in the prop -->
-    <modal :show.sync="showModal">
-      <h3 slot="header">Load VSON data</h3>
-      <div slot="body">
-        <p>
-          Example urls:
-        </p>
-        <ul>
-          <li>http://localhost:8080/course/TDT4100</li>
-        </ul>
-        <input :value="url" @input="url = $event.target.value" style="width: 400px;"/>
-        <button class="modal-default-button"
-                @click="fetchData()">
-          Load
-        </button>
-      </div>
-      <div slot="footer"></div>
-
-    </modal>
-
-    <pre>{{ course.id }}</pre>
     <expected-v-s-actual :units=units></expected-v-s-actual>
     <h2>Content usage by type:</h2>
     <c-usage-type :units=units></c-usage-type>
@@ -41,8 +18,6 @@
 
 <script>
 
-  import axios from 'axios';
-  import Modal from './tools/Modal';
   import ExpectedVSActual from './subviews/ExpectedVSActualPerformance';
   import ContentUsageByType from './subviews/ContentUsageByType';
   import ContentUsageByTopic from './subviews/ContentUsageByTopic';
@@ -50,6 +25,8 @@
   import ContentCompletionByTopic from './subviews/ContentCompletionByTopic';
   import ContentRecommendedRateByType from './subviews/ContentRecommendedRateByType';
   import ContentRecommendedRateByTopic from './subviews/ContentRecommendedRateByTopic';
+
+  import { store } from '../main';
 
   export default {
     components: {
@@ -60,30 +37,15 @@
       CCompletionTopic: ContentCompletionByTopic,
       CRecommendedRateType: ContentRecommendedRateByType,
       CRecommendedRateTopic: ContentRecommendedRateByTopic,
-      Modal,
     },
     data() {
       return {
-        course: [],
-        errors: [],
-        showModal: true,
-        url: 'http://localhost:8080/course/TDT4100',
+        store,
       };
     },
     computed: {
       units() {
-        return this.course.units;
-      },
-    },
-    methods: {
-      fetchData() {
-        axios.get(this.url).then((response) => {
-          this.course = response.data;
-          this.showModal = !this.showModal;
-        })
-        .catch((e) => {
-          this.errors.push(e);
-        });
+        return this.store.course.units;
       },
     },
   };

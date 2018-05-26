@@ -16,6 +16,27 @@
         </div>
       </div>
       <div class="pure-u-lg-20-24 pure-u-xl-21-24">
+        <button id="show-modal" @click="showModal = true">Load data</button>
+        <modal :show.sync="showModal">
+          <h3 slot="header">Load VSON data</h3>
+          <div slot="body">
+            <p>
+              Example urls:
+            </p>
+            <ul>
+              <li>http://localhost:8080/course/TDT4100</li>
+            </ul>
+            <input :value="url" @input="url = $event.target.value" style="width: 400px;"/>
+            <button class="modal-default-button"
+                    @click="fetchData()">
+              Load
+            </button>
+          </div>
+          <div slot="footer">
+            <button class="" @click="showModal = false">Close</button>
+          </div>
+
+        </modal>
         <router-view/>
       </div>
     </div>
@@ -26,9 +47,41 @@
 </template>
 
 <script>
-export default {
-  name: 'app',
-};
+  import axios from 'axios';
+  import { store } from './main';
+
+  import Modal from './components/tools/Modal';
+
+  export default {
+    name: 'app',
+    components: {
+      Modal,
+    },
+    data() {
+      return {
+        errors: [],
+        showModal: true,
+        url: 'http://localhost:8080/course/TDT4100',
+        store,
+      };
+    },
+    computed: {
+      units() {
+        return this.store.course.units;
+      },
+    },
+    methods: {
+      fetchData() {
+        axios.get(this.url).then((response) => {
+          this.store.course = response.data;
+          this.showModal = !this.showModal;
+        })
+          .catch((e) => {
+            this.errors.push(e);
+          });
+      },
+    },
+  };
 </script>
 
 <style>

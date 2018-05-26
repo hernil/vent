@@ -10,24 +10,19 @@ import router from './router';
 
 Vue.config.productionTip = false;
 
+const store = {
+  course: {},
+};
+// eslint-disable-next-line import/prefer-default-export
+export { store };
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  data: store,
   template: '<App/>',
   components: { App },
 });
 
 Vue.use(VueHighcharts, { Highcharts });
 
-/*  Vue.use(Vuex)
-// eslint-disable-next-line no-unused-vars
-const store = new Vuex.Store({
-  state: {
-    count: 0,
-  },
-  mutations: {
-    increment: state => state.count++,
-    decrement: state => state.count--,
-  },
-}); */

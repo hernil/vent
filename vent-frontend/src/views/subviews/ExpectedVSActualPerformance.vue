@@ -6,7 +6,7 @@
 
 <script>
 
-  import SpiderChart from '../charts/SpiderChart';
+  import SpiderChart from '../../components/charts/SpiderChart';
 
   export default {
     name: 'ExpectedVSActual',

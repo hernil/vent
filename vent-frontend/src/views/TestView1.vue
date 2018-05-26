@@ -20,10 +20,10 @@
 
 <script>
   import axios from 'axios';
-  import LineChartView from './charts/LineChart';
-  import PieChartView from './charts/PieChart';
-  import BarChartView from './charts/BarChart';
-  import SpiderChartView from './charts/SpiderChart';
+  import LineChartView from '../components/charts/LineChart';
+  import PieChartView from '../components/charts/PieChart';
+  import BarChartView from '../components/charts/BarChart';
+  import SpiderChartView from '../components/charts/SpiderChart';
 
   export default {
     name: 'TestView1',

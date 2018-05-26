@@ -91,7 +91,7 @@
             enabled: false,
           },
           series: [{
-            name: 'Percentage used',
+            name: this.title,
             data: [Math.round(this.value * 1000) / 10],
             dataLabels: {
               format: '<div style="text-align:center"><span style="font-size:25px;color:' +

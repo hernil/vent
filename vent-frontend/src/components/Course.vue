@@ -1,25 +1,48 @@
 <template>
   <div>
+
+    <button id="show-modal" @click="showModal = true">Load data</button>
+    <!-- use the modal component, pass in the prop -->
+    <modal :show.sync="showModal">
+      <h3 slot="header">Load VSON data</h3>
+      <div slot="body">
+        <p>
+          Example urls:
+        </p>
+        <ul>
+          <li>http://localhost:8080/course/TDT4100</li>
+        </ul>
+        <input :value="url" @input="url = $event.target.value" style="width: 400px;"/>
+        <button class="modal-default-button"
+                @click="fetchData()">
+          Load
+        </button>
+      </div>
+      <div slot="footer"></div>
+
+    </modal>
+
     <pre>{{ course.id }}</pre>
-    <expected-v-s-actual :units=course.units></expected-v-s-actual>
+    <expected-v-s-actual :units=units></expected-v-s-actual>
     <h2>Content usage by type:</h2>
-    <c-usage-type :units=course.units></c-usage-type>
+    <c-usage-type :units=units></c-usage-type>
     <h2>Content usage by topic:</h2>
-    <c-usage-topic :units=course.units></c-usage-topic>
+    <c-usage-topic :units=units></c-usage-topic>
     <h2>Content completion by type:</h2>
-    <c-completion-type :units=course.units></c-completion-type>
+    <c-completion-type :units=units></c-completion-type>
     <h2>Content completion by topic:</h2>
-    <c-completion-topic :units=course.units></c-completion-topic>
+    <c-completion-topic :units=units></c-completion-topic>
     <h2>Content recommended-rate by type:</h2>
-    <c-recommended-rate-type :units=course.units></c-recommended-rate-type>
+    <c-recommended-rate-type :units=units></c-recommended-rate-type>
     <h2>Content recommended-rate by topic:</h2>
-    <c-recommended-rate-topic :units=course.units></c-recommended-rate-topic>
+    <c-recommended-rate-topic :units=units></c-recommended-rate-topic>
   </div>
 </template>
 
 <script>
 
   import axios from 'axios';
+  import Modal from './tools/Modal';
   import ExpectedVSActual from './subviews/ExpectedVSActualPerformance';
   import ContentUsageByType from './subviews/ContentUsageByType';
   import ContentUsageByTopic from './subviews/ContentUsageByTopic';
@@ -37,21 +60,31 @@
       CCompletionTopic: ContentCompletionByTopic,
       CRecommendedRateType: ContentRecommendedRateByType,
       CRecommendedRateTopic: ContentRecommendedRateByTopic,
+      Modal,
     },
     data() {
       return {
         course: [],
         errors: [],
+        showModal: true,
+        url: 'http://localhost:8080/course/TDT4100',
       };
     },
-    mounted() {
-      const url = 'http://localhost:8080/course/TDT4100';
-      axios.get(url).then((response) => {
-        this.course = response.data;
-      })
-      .catch((e) => {
-        this.errors.push(e);
-      });
+    computed: {
+      units() {
+        return this.course.units;
+      },
+    },
+    methods: {
+      fetchData() {
+        axios.get(this.url).then((response) => {
+          this.course = response.data;
+          this.showModal = !this.showModal;
+        })
+        .catch((e) => {
+          this.errors.push(e);
+        });
+      },
     },
   };
 

@@ -9,7 +9,7 @@
         <PieChartView/>
       </div>
       <div class="pure-u-1 pure-u-lg-1-3">
-        <BarChartView/>
+        <ColumnChartView/>
       </div>
     </div>
     <div class="pure-u-1 pure-u-lg-1-3">
@@ -25,7 +25,7 @@
   import axios from 'axios';
   import LineChartView from '../components/charts/LineChart';
   import PieChartView from '../components/charts/PieChart';
-  import BarChartView from '../components/charts/BarChart';
+  import ColumnChartView from '../components/charts/ColumnChart';
   import SpiderChartView from '../components/charts/SpiderChart';
   import SolidGaugeView from '../components/charts/SolidGauge';
 
@@ -34,7 +34,7 @@
     components: {
       LineChartView,
       PieChartView,
-      BarChartView,
+      ColumnChartView,
       SpiderChartView,
       SolidGaugeView,
     },

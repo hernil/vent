@@ -22,7 +22,7 @@
   import axios from 'axios';
   import LineChartView from '../components/charts/LineChart';
   import PieChartView from '../components/charts/PieChart';
-  import BarChartView from '../components/charts/BarChart';
+  import BarChartView from '../components/charts/ColumnChart';
   import SpiderChartView from '../components/charts/SpiderChart';
 
   export default {

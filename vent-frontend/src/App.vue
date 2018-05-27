@@ -10,7 +10,7 @@
             <li class="pure-menu-item"><router-link class="pure-menu-link" :to="{ name: 'TopicView'}">TopicView</router-link></li>
             <li class="pure-menu-item"><router-link class="pure-menu-link" :to="{ name: 'TypeView'}">TypeView</router-link></li>
             <li class="pure-menu-item"><router-link class="pure-menu-link" :to="{ name: 'TestView'}">TestView1</router-link></li>
-            <li class="pure-menu-heading">More Sites</li>
+            <li class="pure-menu-heading">Related Sites</li>
             <li class="pure-menu-item"><a href="http://protus.idi.ntnu.no" target="_blank" class="pure-menu-link">Protus</a></li>
           </ul>
         </div>

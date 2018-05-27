@@ -11,7 +11,7 @@ import router from './router';
 Vue.config.productionTip = false;
 
 const store = {
-  course: {},
+  course: null,
 };
 // eslint-disable-next-line import/prefer-default-export
 export { store };

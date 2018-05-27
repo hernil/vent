@@ -37,7 +37,12 @@
           </div>
 
         </modal>
-        <router-view/>
+        <div v-if="this.store.course != null">
+          <router-view/>
+        </div>
+        <div v-else>
+          <p>Please load data </p>
+        </div>
       </div>
     </div>
 

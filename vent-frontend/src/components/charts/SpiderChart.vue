@@ -94,6 +94,9 @@
             data: this.expected,
             pointPlacement: 'on',
           }],
+          credits: {
+            enabled: false,
+          },
         },
       };
     },

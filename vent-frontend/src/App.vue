@@ -66,7 +66,7 @@
       return {
         errors: [],
         showModal: true,
-        url: 'http://localhost:8080/course/TDT4100',
+        url: store.defaults.defaultVSONUrl,
         store,
       };
     },

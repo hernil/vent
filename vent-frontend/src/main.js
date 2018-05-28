@@ -11,6 +11,9 @@ import router from './router';
 Vue.config.productionTip = false;
 
 const store = {
+  defaults: {
+    defaultVSONUrl: 'http://localhost:8080/course/TDT4100',
+  },
   course: null,
 };
 // eslint-disable-next-line import/prefer-default-export

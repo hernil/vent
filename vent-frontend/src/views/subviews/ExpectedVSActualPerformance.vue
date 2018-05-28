@@ -22,11 +22,15 @@
       parsedUnits() {
         return this.parseUnitsForRendering(this.units);
       },
-      categories() { return this.parseUnitsForRendering(this.units).map(unit => unit.topic); },
+      categories() {
+        return this.parseUnitsForRendering(this.units).map(unit => unit.topic);
+      },
       expected() {
         return this.parseUnitsForRendering(this.units).map(unit => unit.expectedPerformance);
       },
-      actual() { return this.parseUnitsForRendering(this.units).map(unit => unit.performance); },
+      actual() {
+        return this.parseUnitsForRendering(this.units).map(unit => unit.performance);
+      },
     },
     methods: {
       parseUnitsForRendering: (input) => {
@@ -34,17 +38,17 @@
         const expectedPerformances = {};
         const counts = {};
         const results = [];
-        let type;
+        let topic;
         input.forEach((unit) => {
-          type = unit.topic;
-          if (!(type in performances)) {
-            performances[type] = 0;
-            expectedPerformances[type] = 0;
-            counts[type] = 0;
+          topic = unit.topic;
+          if (!(topic in performances)) {
+            performances[topic] = 0;
+            expectedPerformances[topic] = 0;
+            counts[topic] = 0;
           }
-          performances[type] += unit.performance;
-          expectedPerformances[type] += unit.expectedPerformance;
-          counts[type] += 1;
+          performances[topic] += unit.performance;
+          expectedPerformances[topic] += unit.expectedPerformance;
+          counts[topic] += 1;
         });
         Object.keys(performances).forEach((key) => {
           if (Object.prototype.hasOwnProperty.call(performances, key)) {

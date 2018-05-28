@@ -54,7 +54,7 @@
           },
 
           tooltip: {
-            enabled: false,
+            enabled: true,
           },
 
           // the value axis

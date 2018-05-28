@@ -77,6 +77,8 @@
     },
     methods: {
       fetchData() {
+        // Ugly hack because soludGauge will not update on value change
+        this.store.course = null;
         axios.get(this.url).then((response) => {
           this.store.course = response.data;
           this.showModal = !this.showModal;

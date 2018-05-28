@@ -6,9 +6,7 @@
 </template>
 
 <script>
-  /* eslint-disable no-console,prefer-const,spaced-comment */
 
-  import axios from 'axios';
   import Vue from 'vue';
   import VueHighcharts from 'vue-highcharts';
   import Highcharts from 'highcharts';
@@ -18,6 +16,34 @@
     components: {
       VueHighcharts,
     },
+    props: {
+      title: {
+        type: String,
+        default: 'ColumnChart',
+        required: true,
+      },
+      subtitle: {
+        type: String,
+        default: '',
+        required: true,
+      },
+      yAxis: {
+        type: String,
+        default: '',
+        required: true,
+      },
+      categories: {
+        type: Array,
+        default: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+          'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        required: true,
+      },
+      series: {
+        type: Array,
+        default: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+        required: true,
+      },
+    },
     data() {
       return {
         options: {
@@ -25,18 +51,17 @@
             type: 'spline',
           },
           title: {
-            text: 'Monthly Average Temperature',
+            text: this.title,
           },
           subtitle: {
-            text: 'Source: WorldClimate.com',
+            text: this.subtitle,
           },
           xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-              'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            categories: this.categories,
           },
           yAxis: {
             title: {
-              text: 'Temperature',
+              text: this.yAxis,
             },
             labels: {
               formatter() {
@@ -61,38 +86,13 @@
             },
           },
           series: [{
-            name: 'Tokyo',
-            data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+            name: 'Data',
+            data: this.series,
 
           },
           ],
         },
       };
-    },
-    mounted() {
-      /*const lineCharts = this.$refs.lineCharts;
-      const url = 'http://localhost:8080/data/20';
-      lineCharts.delegateMethod('showLoading', 'Loading...');
-      setTimeout(() => {
-        let asyncData = {};
-        axios.get(url)
-          .then((response) => {
-            // JSON responses are automatically parsed.
-            // console.log(response.data);
-            asyncData = response.data;
-            console.log(asyncData);
-            lineCharts.addSeries(asyncData);
-            lineCharts.hideLoading();
-          })
-          .catch((e) => {
-            console.log(e);
-          });
-      }, 50);*/
-      const lineCharts = this.$refs.lineCharts;
-      const url = 'http://localhost:8080/data/1';
-      axios.get(url).then((response) => {
-        lineCharts.chart.addSeries(response.data);
-      });
     },
   };
 </script>

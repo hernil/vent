@@ -3,7 +3,7 @@
     <h1>{{ data.course }}</h1>
     <div class="pure-g">
       <div class="pure-u-1 pure-u-lg-1-3">
-        <LineChartView/>
+        <LineChartView :title="'Avarage temperatures'" :subtitle="'Source: weather.com'" />
       </div>
       <div class="pure-u-1 pure-u-lg-1-3">
         <PieChartView/>

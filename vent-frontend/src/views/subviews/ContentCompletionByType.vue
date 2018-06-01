@@ -8,7 +8,7 @@
 
 <script>
 
-  import SolidGauge from '../charts/SolidGauge';
+  import SolidGauge from '../../components/charts/SolidGauge';
 
   export default {
     name: 'ContentCompletionByType',

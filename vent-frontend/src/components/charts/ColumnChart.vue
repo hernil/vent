@@ -1,17 +1,14 @@
 <template>
   <div>
-    <highcharts :options="options" ref="lineCharts"></highcharts>
+    <highcharts :options="options" ref="barCharts"></highcharts>
     <!--<button @click="load">load</button>-->
   </div>
 </template>
 
 <script>
 
-  import Vue from 'vue';
   import VueHighcharts from 'vue-highcharts';
-  import Highcharts from 'highcharts';
 
-  Vue.use(VueHighcharts, { Highcharts });
   export default {
     components: {
       VueHighcharts,
@@ -44,11 +41,16 @@
         required: true,
       },
     },
+    watch: {
+      categories(val) { this.options.xAxis.categories = val; },
+      yAxis(val) { this.options.yAxis.title.text = val; },
+      series(val) { this.options.series[0].data = val; },
+    },
     data() {
       return {
         options: {
           chart: {
-            type: 'spline',
+            type: 'column',
           },
           title: {
             text: this.title,
@@ -65,7 +67,7 @@
             },
             labels: {
               formatter() {
-                return `${this.value}°`;
+                return `${this.value}`;
               },
             },
           },

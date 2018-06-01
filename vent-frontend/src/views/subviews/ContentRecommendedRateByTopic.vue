@@ -1,17 +1,17 @@
 <template>
   <div class="pure-g">
     <div v-for="unit in parsedUnits" class="pure-u-sm-1-2 pure-u-lg-1-4">
-      <solid-gauge :title=unit.type :value=unit.recommended></solid-gauge>
+      <solid-gauge :title=unit.topic :value=unit.recommended></solid-gauge>
     </div>
   </div>
 </template>
 
 <script>
 
-  import SolidGauge from '../charts/SolidGauge';
+  import SolidGauge from '../../components/charts/SolidGauge';
 
   export default {
-    name: 'ContentRecommendedRateByType',
+    name: 'ContentRecommendedRateByTopic',
     components: { SolidGauge },
     props: {
       units: {
@@ -30,21 +30,21 @@
         const sums = {};
         const counts = {};
         const results = [];
-        let type;
+        let topic;
         input.forEach((unit) => {
-          type = unit.type;
-          if (!(type in sums)) {
-            sums[type] = 0;
-            counts[type] = 0;
+          topic = unit.topic;
+          if (!(topic in sums)) {
+            sums[topic] = 0;
+            counts[topic] = 0;
           }
-          sums[type] += unit.recommended;
-          counts[type] += 1;
+          sums[topic] += unit.recommended;
+          counts[topic] += 1;
         });
         Object.keys(sums).forEach((key) => {
           if (Object.prototype.hasOwnProperty.call(sums, key)) {
             results.push(
               {
-                type: key,
+                topic: key,
                 recommended: sums[key] / counts[key],
               });
           }

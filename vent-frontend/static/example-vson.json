@@ -1,0 +1,121 @@
+{
+  "id": "TDT4100",
+  "name": "Object-oriented programming",
+  "units": [
+    {
+      "name": "for_loops1",
+      "type": "task",
+      "topic": "for loops",
+      "difficulty": 0,
+      "opened": 0.2,
+      "completed": 0.5,
+      "recommended": 0.93,
+      "timeSpent": 3600,
+      "performance": 0.77,
+      "expectedPerformance": 1
+    },
+    {
+      "name": "for_loops2",
+      "type": "resource",
+      "topic": "for loops",
+      "difficulty": 0,
+      "opened": 0.8,
+      "completed": 0.2,
+      "recommended": 0.44,
+      "timeSpent": 2700,
+      "performance": 0.94,
+      "expectedPerformance": 0.9
+    },
+    {
+      "name": "while_loops1",
+      "type": "excercise",
+      "topic": "while loops",
+      "difficulty": 0,
+      "opened": 0.45,
+      "completed": 0.5,
+      "recommended": 0.15,
+      "timeSpent": 3790,
+      "performance": 0.68,
+      "expectedPerformance": 0.75
+    },
+    {
+      "name": "if_nested",
+      "type": "task",
+      "topic": "ifs",
+      "difficulty": 0,
+      "opened": 0.92,
+      "completed": 0.63,
+      "recommended": 0.26,
+      "timeSpent": 1250,
+      "performance": 0.56,
+      "expectedPerformance": 0.8
+    },
+    {
+      "name": "variables_global",
+      "type": "excercise",
+      "topic": "valiables",
+      "difficulty": 0,
+      "opened": 0.35,
+      "completed": 0.05,
+      "recommended": 0.71,
+      "timeSpent": 4350,
+      "performance": 0.88,
+      "expectedPerformance": 0.85
+    },
+    {
+      "name": "methods_creating",
+      "type": "resource",
+      "topic": "methods",
+      "difficulty": 0,
+      "opened": 0.8,
+      "completed": 0.9,
+      "recommended": 0.35,
+      "timeSpent": 1932,
+      "performance": 0.2,
+      "expectedPerformance": 0.9
+    },
+    {
+      "name": "methods_calling",
+      "type": "resource",
+      "topic": "methods",
+      "difficulty": 0,
+      "opened": 0.54,
+      "completed": 0.25,
+      "recommended": 0.38,
+      "timeSpent": 1351,
+      "performance": 0.5,
+      "expectedPerformance": 0.4
+    },
+    {
+      "name": "methods_returning",
+      "type": "excercise",
+      "topic": "methods",
+      "difficulty": 0,
+      "opened": 0.8,
+      "completed": 0.6,
+      "recommended": 0.35,
+      "timeSpent": 3100,
+      "performance": 0.6,
+      "expectedPerformance": 0.75
+    }
+  ],
+  "students": [
+    {
+      "id": "1",
+      "performance": 0.5,
+      "units": [
+        {
+          "name": "testname",
+          "type": "testtype",
+          "topic": "testtopic",
+          "difficulty": 4,
+          "opened": true,
+          "completed": true,
+          "recommended": false,
+          "timeSpent": 3600,
+          "performance": 0.5
+        }
+      ]
+    }
+  ]
+}

@@ -1,17 +1,17 @@
 <template>
   <div class="pure-g">
     <div v-for="unit in parsedUnits" class="pure-u-sm-1-2 pure-u-lg-1-4">
-      <solid-gauge :title=unit.topic :value=unit.completed></solid-gauge>
+      <solid-gauge :title=unit.topic :value=unit.opened></solid-gauge>
     </div>
   </div>
 </template>
 
 <script>
 
-  import SolidGauge from '../charts/SolidGauge';
+  import SolidGauge from '../../components/charts/SolidGauge';
 
   export default {
-    name: 'ContentCompletionByTopic',
+    name: 'ContentUsageByTopic',
     components: { SolidGauge },
     props: {
       units: {
@@ -37,7 +37,7 @@
             sums[topic] = 0;
             counts[topic] = 0;
           }
-          sums[topic] += unit.completed;
+          sums[topic] += unit.opened;
           counts[topic] += 1;
         });
         Object.keys(sums).forEach((key) => {
@@ -45,7 +45,7 @@
             results.push(
               {
                 topic: key,
-                completed: sums[key] / counts[key],
+                opened: sums[key] / counts[key],
               });
           }
         });

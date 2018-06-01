@@ -25,6 +25,7 @@
             </p>
             <ul>
               <li>http://localhost:8080/course/TDT4100</li>
+              <li>http://localhost:3000/static/example-vson.json</li>
             </ul>
             <input :value="url" @input="url = $event.target.value" style="width: 400px;"/>
             <button class="modal-default-button"
